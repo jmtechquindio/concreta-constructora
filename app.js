@@ -39,9 +39,16 @@ function renderBrandAndHero(data) {
   const info = data.info;
   const contacto = data.contacto;
 
-  // Marca Navbar
-  document.getElementById('brandTitle').innerHTML = `${info.nombre.toUpperCase()} <span>·</span>`;
-  document.getElementById('brandTag').textContent = info.subtitulo.toUpperCase();
+  // Marca Navbar & Footer
+  const brandTitleEl = document.getElementById('brandTitle');
+  if (brandTitleEl) brandTitleEl.textContent = info.nombre.toUpperCase();
+  const brandTagEl = document.getElementById('brandTag');
+  if (brandTagEl) brandTagEl.textContent = (info.subtitulo || 'INGENIERÍA & ARQUITECTURA').toUpperCase();
+
+  const footerBrandTitleEl = document.getElementById('footerBrandTitle');
+  if (footerBrandTitleEl) footerBrandTitleEl.textContent = info.nombre.toUpperCase();
+  const footerBrandTagEl = document.getElementById('footerBrandTag');
+  if (footerBrandTagEl) footerBrandTagEl.textContent = (info.subtitulo || 'INGENIERÍA & ARQUITECTURA').toUpperCase();
 
   // Enlaces de WhatsApp en Navbar y Hero
   const waUrl = `https://wa.me/${contacto.whatsapp}?text=Hola%20${encodeURIComponent(info.nombre)},%20quisiera%20iniciar%20un%20proyecto`;
