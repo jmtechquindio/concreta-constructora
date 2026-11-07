@@ -25,7 +25,7 @@
   <nav class="nav-fixed" id="navbar">
     <div class="container nav-wrapper">
       <a href="#" class="brand-logo-wrap" id="navBrandLogo">
-        <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Logo Empresa" class="brand-logo-img">
+        <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Logo Empresa" class="brand-logo-img" id="navBrandLogoImg">
         <div class="brand-info-col">
           <div class="brand-text-name">
             <span id="brandTitle">CONCRETA</span>
@@ -542,7 +542,7 @@
       <div class="footer-top-grid">
         <div>
           <div class="brand-logo-wrap" style="margin-bottom:16px;">
-            <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Logo Empresa" class="brand-logo-img">
+            <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Logo Empresa" class="brand-logo-img" id="footerBrandLogoImg">
             <div class="brand-info-col">
               <div class="brand-text-name" style="font-size:19px;">
                 <span id="footerBrandTitle">CONCRETA</span>
@@ -676,8 +676,8 @@
   <div class="editor-drawer" id="companyEditorDrawer">
     <div class="editor-header">
       <div class="editor-title">
-        <span class="material-symbols-outlined" style="color:var(--verde-brand);">admin_panel_settings</span>
-        <span>Editor de Empresa</span>
+        <span class="material-symbols-outlined" style="color:var(--verde-brand);">tune</span>
+        <span>Personalización & Empresa</span>
       </div>
       <button class="modal-close-btn" style="position:static;" onclick="closeCompanyEditor()">
         <span class="material-symbols-outlined">close</span>
@@ -686,15 +686,163 @@
 
     <!-- Tabs -->
     <div class="editor-tabs">
-      <button class="editor-tab-btn active" data-tab="general" onclick="switchEditorTab('general')">General</button>
-      <button class="editor-tab-btn" data-tab="contacto" onclick="switchEditorTab('contacto')">Contacto</button>
-      <button class="editor-tab-btn" data-tab="metricas" onclick="switchEditorTab('metricas')">Métricas</button>
-      <button class="editor-tab-btn" data-tab="exportar" onclick="switchEditorTab('exportar')">Exportar / GitHub</button>
+      <button class="editor-tab-btn active" data-tab="estilos" onclick="switchEditorTab('estilos')">
+        <span class="material-symbols-outlined" style="font-size:16px;">palette</span>
+        <span>Estilos & Colores</span>
+      </button>
+      <button class="editor-tab-btn" data-tab="imagenes" onclick="switchEditorTab('imagenes')">
+        <span class="material-symbols-outlined" style="font-size:16px;">add_photo_alternate</span>
+        <span>Logo e Imágenes</span>
+      </button>
+      <button class="editor-tab-btn" data-tab="general" onclick="switchEditorTab('general')">
+        <span class="material-symbols-outlined" style="font-size:16px;">badge</span>
+        <span>General</span>
+      </button>
+      <button class="editor-tab-btn" data-tab="contacto" onclick="switchEditorTab('contacto')">
+        <span class="material-symbols-outlined" style="font-size:16px;">call</span>
+        <span>Contacto</span>
+      </button>
+      <button class="editor-tab-btn" data-tab="metricas" onclick="switchEditorTab('metricas')">
+        <span class="material-symbols-outlined" style="font-size:16px;">analytics</span>
+        <span>Métricas</span>
+      </button>
+      <button class="editor-tab-btn" data-tab="exportar" onclick="switchEditorTab('exportar')">
+        <span class="material-symbols-outlined" style="font-size:16px;">download</span>
+        <span>Exportar</span>
+      </button>
     </div>
 
     <div class="editor-body">
-      <!-- Tab 1: General -->
-      <div class="editor-tab-content active" id="tab-general">
+      <!-- Tab 1: Estilos y Colores -->
+      <div class="editor-tab-content active" id="tab-estilos">
+        <div>
+          <div class="theme-section-title">
+            <span class="material-symbols-outlined" style="font-size:18px; color:var(--verde-brand);">auto_fix_high</span>
+            <span>Plantillas Predeterminadas</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-dim); margin-bottom:12px;">
+            Selecciona una paleta de diseño diseñada por arquitectos para transformar el sitio con un clic:
+          </p>
+          <div class="presets-grid" id="themePresetsGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--border-subtle); padding-top:16px; margin-top:8px;">
+          <div class="theme-section-title">
+            <span class="material-symbols-outlined" style="font-size:18px; color:var(--verde-brand);">colorize</span>
+            <span>Modo Personalizado (Ajuste Fino de Colores)</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">
+            Ajusta los colores individuales en tiempo real con los selectores de color:
+          </p>
+
+          <div class="color-picker-grid">
+            <div class="color-picker-item">
+              <span class="color-picker-label">Color Primario / Marca</span>
+              <div class="color-picker-ctrl">
+                <input type="color" class="color-picker-input" id="pickBrandColor" oninput="handleCustomColorChange('verdeBrand', this.value)">
+                <span class="color-hex-text" id="hexBrandColor">#3eb828</span>
+              </div>
+            </div>
+
+            <div class="color-picker-item">
+              <span class="color-picker-label">Fondo Principal</span>
+              <div class="color-picker-ctrl">
+                <input type="color" class="color-picker-input" id="pickBgDeep" oninput="handleCustomColorChange('bgDeep', this.value)">
+                <span class="color-hex-text" id="hexBgDeep">#090c0e</span>
+              </div>
+            </div>
+
+            <div class="color-picker-item">
+              <span class="color-picker-label">Fondo de Tarjetas</span>
+              <div class="color-picker-ctrl">
+                <input type="color" class="color-picker-input" id="pickBgCard" oninput="handleCustomColorChange('bgCard', this.value)">
+                <span class="color-hex-text" id="hexBgCard">#161c22</span>
+              </div>
+            </div>
+
+            <div class="color-picker-item">
+              <span class="color-picker-label">Texto Principal</span>
+              <div class="color-picker-ctrl">
+                <input type="color" class="color-picker-input" id="pickTextMain" oninput="handleCustomColorChange('textMain', this.value)">
+                <span class="color-hex-text" id="hexTextMain">#f1f5f9</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Logo e Imágenes -->
+      <div class="editor-tab-content" id="tab-imagenes">
+        <!-- Logo Section -->
+        <div>
+          <div class="theme-section-title">
+            <span class="material-symbols-outlined" style="font-size:18px; color:var(--verde-brand);">badge</span>
+            <span>Logo de la Empresa</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">
+            Sube el logo de tu empresa desde tu computador o ingresa una URL:
+          </p>
+
+          <div class="logo-preview-box">
+            <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Logo Previa" class="logo-preview-thumb" id="logoPreviewImg">
+            <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+              <div class="file-upload-btn-wrap">
+                <button class="btn btn-primary" style="width:100%; font-size:11px; padding:8px 12px;">
+                  <span class="material-symbols-outlined" style="font-size:16px;">upload_file</span>
+                  <span>Subir Logo desde tu PC</span>
+                </button>
+                <input type="file" id="logoFileInput" accept="image/*" onchange="handleLogoFileUpload(event)">
+              </div>
+              <div class="form-group-custom" style="margin:0;">
+                <input type="text" class="form-input-custom" id="editLogoUrl" placeholder="O pega la URL de tu logo aquí..." onchange="handleLogoUrlChange(this.value)" style="font-size:12px; padding:8px 12px;">
+              </div>
+              <div>
+                <button class="btn btn-ghost" onclick="restoreDefaultLogo()" style="font-size:10px; padding:4px 10px;">
+                  <span>Restaurar Logo Original</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Media -->
+        <div style="border-top:1px solid var(--border-subtle); padding-top:18px; margin-top:8px;">
+          <div class="theme-section-title">
+            <span class="material-symbols-outlined" style="font-size:18px; color:var(--verde-brand);">videocam</span>
+            <span>Fondo del Hero (Video de YouTube)</span>
+          </div>
+          <div class="form-group-custom">
+            <label class="form-label-custom">ID de Video de YouTube (11 caracteres, ej: gQDHFTBZWUk)</label>
+            <input type="text" class="form-input-custom" id="editYoutubeId" placeholder="Ej: gQDHFTBZWUk">
+          </div>
+        </div>
+
+        <!-- Projects Images & Content Manager -->
+        <div style="border-top:1px solid var(--border-subtle); padding-top:18px; margin-top:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div class="theme-section-title" style="margin:0;">
+              <span class="material-symbols-outlined" style="font-size:18px; color:var(--verde-brand);">photo_library</span>
+              <span>Proyectos y Galería de Obras</span>
+            </div>
+            <button class="btn btn-secondary" onclick="addNewProjectToEditor()" style="font-size:11px; padding:6px 12px;">
+              <span class="material-symbols-outlined" style="font-size:14px;">add</span>
+              <span>+ Nuevo Proyecto</span>
+            </button>
+          </div>
+          <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">
+            Edita las fotos, nombres, m² y descripciones de cada obra en el portafolio:
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:14px;" id="projectsEditorContainer">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: General -->
+      <div class="editor-tab-content" id="tab-general">
         <div class="form-group-custom">
           <label class="form-label-custom">Nombre de la Empresa</label>
           <input type="text" class="form-input-custom" id="editNombre">
@@ -712,12 +860,12 @@
           <textarea class="form-input-custom" id="editSloganSub" rows="3"></textarea>
         </div>
         <div class="form-group-custom">
-          <label class="form-label-custom">Texto de la Píldora de Estado</label>
+          <label class="form-label-custom">Texto de la Píldora de Estado (Obras Activas)</label>
           <input type="text" class="form-input-custom" id="editPillText">
         </div>
       </div>
 
-      <!-- Tab 2: Contacto -->
+      <!-- Tab 4: Contacto -->
       <div class="editor-tab-content" id="tab-contacto">
         <div class="form-group-custom">
           <label class="form-label-custom">Número WhatsApp (sin signos, ej: 573023376241)</label>
@@ -741,7 +889,7 @@
         </div>
       </div>
 
-      <!-- Tab 3: Métricas -->
+      <!-- Tab 5: Métricas -->
       <div class="editor-tab-content" id="tab-metricas">
         <div class="form-group-custom">
           <label class="form-label-custom">Años de Trayectoria</label>
@@ -761,10 +909,10 @@
         </div>
       </div>
 
-      <!-- Tab 4: Exportar / GitHub -->
+      <!-- Tab 6: Exportar / GitHub -->
       <div class="editor-tab-content" id="tab-exportar">
         <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
-          Los cambios que guardas se aplican de inmediato en este navegador. Para hacerlos permanentes en tu repositorio de GitHub Pages, descarga el archivo <code>company-data.js</code> actualizado o copia el código y reemplázalo en tu repositorio:
+          Todos los cambios que realices (colores, logo, proyectos y datos) se guardan automáticamente en tu navegador. Para hacerlos permanentes en GitHub Pages, puedes descargar el archivo <code>company-data.js</code> actualizado o copiar su código:
         </p>
 
         <button class="btn btn-primary" onclick="downloadUpdatedConfigFile()" style="width:100%;">
@@ -780,7 +928,7 @@
         <div style="border-top:1px dashed var(--border-subtle); padding-top:16px; margin-top:8px;">
           <button class="btn btn-ghost" onclick="restoreDefaults()" style="width:100%; color:#f87171; border-color:#f87171;">
             <span class="material-symbols-outlined">restart_alt</span>
-            <span>Restablecer Valores Predeterminados</span>
+            <span>Restablecer Todo a Valores Predeterminados</span>
           </button>
         </div>
       </div>
@@ -790,7 +938,7 @@
     <div class="editor-footer">
       <button class="btn btn-primary" style="flex:1;" onclick="applyAndSaveEditorChanges()">
         <span class="material-symbols-outlined">save</span>
-        <span>Guardar y Aplicar</span>
+        <span>Guardar y Aplicar Cambios</span>
       </button>
       <button class="btn btn-secondary" onclick="closeCompanyEditor()">
         <span>Cerrar</span>

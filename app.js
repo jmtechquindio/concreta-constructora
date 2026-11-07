@@ -7,18 +7,95 @@ let currentData = null;
 let currentProjectFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Cargar datos
+  // 1. Cargar datos desde localStorage o predeterminados
   currentData = window.getCompanyData();
-  
-  // 2. Renderizar sitio completo
+
+  // 2. Aplicar tema y colores
+  applyTheme(currentData.tema);
+
+  // 3. Renderizar sitio completo
   renderAllSections(currentData);
-  
-  // 3. Inicializar eventos interactivos
+
+  // 4. Inicializar eventos interactivos
   initEventListeners();
-  
-  // 4. Inicializar calculadora
+
+  // 5. Inicializar calculadora
   updateCalculator();
 });
+
+/* ========================================================
+   SISTEMA DE ESTILOS Y TEMAS DINÁMICOS
+   ======================================================== */
+function applyTheme(themeObj) {
+  if (!themeObj || !themeObj.colores) return;
+  const c = themeObj.colores;
+  const root = document.documentElement;
+
+  if (c.verdeBrand) {
+    root.style.setProperty('--verde-brand', c.verdeBrand);
+    root.style.setProperty('--verde-glow', hexToRgba(c.verdeBrand, 0.35));
+    root.style.setProperty('--verde-subtle', hexToRgba(c.verdeBrand, 0.12));
+  }
+  if (c.verdeDark) root.style.setProperty('--verde-dark', c.verdeDark);
+  if (c.verdeLight) root.style.setProperty('--verde-light', c.verdeLight);
+  if (c.bgDeep) root.style.setProperty('--bg-deep', c.bgDeep);
+  if (c.bgSurface) root.style.setProperty('--bg-surface', c.bgSurface);
+  if (c.bgCard) {
+    root.style.setProperty('--bg-card', c.bgCard);
+    root.style.setProperty('--bg-card-hover', adjustBrightness(c.bgCard, 12));
+  }
+  if (c.textMain) root.style.setProperty('--text-main', c.textMain);
+  if (c.textMuted) root.style.setProperty('--text-muted', c.textMuted);
+
+  // Modo claro vs oscuro
+  const isLight = isColorLight(c.bgDeep || '#090c0e');
+  if (isLight) {
+    root.classList.add('theme-light-mode');
+    root.style.setProperty('--border-subtle', 'rgba(0, 0, 0, 0.08)');
+    root.style.setProperty('--border-strong', 'rgba(0, 0, 0, 0.16)');
+    root.style.setProperty('--text-dim', '#64748b');
+  } else {
+    root.classList.remove('theme-light-mode');
+    root.style.setProperty('--border-subtle', 'rgba(255, 255, 255, 0.08)');
+    root.style.setProperty('--border-strong', 'rgba(255, 255, 255, 0.16)');
+    root.style.setProperty('--text-dim', '#64748b');
+  }
+}
+
+function hexToRgba(hex, alpha) {
+  if (!hex || hex.length < 6) return `rgba(62, 184, 40, ${alpha})`;
+  let cleanHex = hex.replace('#', '');
+  if (cleanHex.length === 3) {
+    cleanHex = cleanHex.split('').map(x => x + x).join('');
+  }
+  const r = parseInt(cleanHex.substring(0, 2), 16) || 0;
+  const g = parseInt(cleanHex.substring(2, 4), 16) || 0;
+  const b = parseInt(cleanHex.substring(4, 6), 16) || 0;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function adjustBrightness(hex, percent) {
+  let cleanHex = (hex || '#161c22').replace('#', '');
+  if (cleanHex.length === 3) cleanHex = cleanHex.split('').map(x => x + x).join('');
+  let num = parseInt(cleanHex, 16);
+  let r = (num >> 16) + percent;
+  let g = ((num >> 8) & 0x00FF) + percent;
+  let b = (num & 0x0000FF) + percent;
+  r = Math.min(255, Math.max(0, r));
+  g = Math.min(255, Math.max(0, g));
+  b = Math.min(255, Math.max(0, b));
+  return `#${(g | (b << 8) | (r << 16)).toString(16).padStart(6, '0')}`;
+}
+
+function isColorLight(hex) {
+  let clean = (hex || '#000').replace('#', '');
+  if (clean.length === 3) clean = clean.split('').map(x => x + x).join('');
+  const r = parseInt(clean.substring(0, 2), 16) || 0;
+  const g = parseInt(clean.substring(2, 4), 16) || 0;
+  const b = parseInt(clean.substring(4, 6), 16) || 0;
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.6;
+}
 
 /* ========================================================
    RENDERIZADO DE SECCIONES DESDE DATOS
@@ -49,6 +126,22 @@ function renderBrandAndHero(data) {
   if (footerBrandTitleEl) footerBrandTitleEl.textContent = info.nombre.toUpperCase();
   const footerBrandTagEl = document.getElementById('footerBrandTag');
   if (footerBrandTagEl) footerBrandTagEl.textContent = (info.subtitulo || 'INGENIERÍA & ARQUITECTURA').toUpperCase();
+
+  // Logo de la empresa
+  const logoUrl = info.logo || 'assets/images/LOGOTIPO_CONCRETA.png';
+  const navLogoImg = document.getElementById('navBrandLogoImg');
+  if (navLogoImg) navLogoImg.src = logoUrl;
+  const footerLogoImg = document.getElementById('footerBrandLogoImg');
+  if (footerLogoImg) footerLogoImg.src = logoUrl;
+
+  // Video de YouTube en Hero
+  const iframe = document.getElementById('heroVideoIframe');
+  if (iframe && info.videoYoutubeId) {
+    const desiredSrc = `https://www.youtube.com/embed/${info.videoYoutubeId}?autoplay=1&mute=1&loop=1&playlist=${info.videoYoutubeId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`;
+    if (!iframe.src.includes(info.videoYoutubeId)) {
+      iframe.src = desiredSrc;
+    }
+  }
 
   // Enlaces de WhatsApp en Navbar y Hero
   const waUrl = `https://wa.me/${contacto.whatsapp}?text=Hola%20${encodeURIComponent(info.nombre)},%20quisiera%20iniciar%20un%20proyecto`;
@@ -210,7 +303,6 @@ function renderTestimonios(data) {
 // 8. Contacto y Footer
 function renderContactAndFooter(data) {
   const contacto = data.contacto;
-  const info = data.info;
 
   if (document.getElementById('contactAddress')) {
     document.getElementById('contactAddress').textContent = contacto.direccion;
@@ -401,12 +493,20 @@ function handleFormSubmit(e) {
 }
 
 /* ========================================================
-   PANEL EDITOR VISUAL DE LA EMPRESA
+   PANEL EDITOR VISUAL DE LA EMPRESA & ESTILOS
    ======================================================== */
 function openCompanyEditor() {
   const drawer = document.getElementById('companyEditorDrawer');
-  
-  // Poblar campos con los datos actuales
+
+  // 1. Renderizar Temas y Colores
+  renderThemePresetsInEditor();
+  populateColorPickers();
+
+  // 2. Renderizar Logo y Proyectos
+  populateLogoEditor();
+  renderProjectsEditorList();
+
+  // 3. Poblar campos de texto
   const info = currentData.info;
   const contacto = currentData.contacto;
 
@@ -415,6 +515,7 @@ function openCompanyEditor() {
   document.getElementById('editSloganPrincipal').value = info.sloganPrincipal || '';
   document.getElementById('editSloganSub').value = info.sloganSub || '';
   document.getElementById('editPillText').value = info.cobertura || '';
+  document.getElementById('editYoutubeId').value = info.videoYoutubeId || 'gQDHFTBZWUk';
 
   document.getElementById('editWhatsapp').value = contacto.whatsapp || '';
   document.getElementById('editWhatsappDisplay').value = contacto.whatsappDisplay || '';
@@ -444,12 +545,301 @@ function switchEditorTab(tabId) {
   if (activeContent) activeContent.classList.add('active');
 }
 
+/* --- Subir y Gestionar Logo --- */
+function populateLogoEditor() {
+  const currentLogo = (currentData.info && currentData.info.logo) || 'assets/images/LOGOTIPO_CONCRETA.png';
+  const preview = document.getElementById('logoPreviewImg');
+  if (preview) preview.src = currentLogo;
+  const urlInput = document.getElementById('editLogoUrl');
+  if (urlInput) urlInput.value = currentLogo.startsWith('data:') ? '' : currentLogo;
+}
+
+function handleLogoFileUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert('La imagen seleccionada supera los 5MB. Por favor elige una imagen más ligera.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const dataUrl = evt.target.result;
+    currentData.info.logo = dataUrl;
+    populateLogoEditor();
+
+    // Actualizar en el DOM en vivo
+    const navLogo = document.getElementById('navBrandLogoImg');
+    if (navLogo) navLogo.src = dataUrl;
+    const footerLogo = document.getElementById('footerBrandLogoImg');
+    if (footerLogo) footerLogo.src = dataUrl;
+
+    window.saveCompanyData(currentData);
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleLogoUrlChange(url) {
+  if (!url || !url.trim()) return;
+  currentData.info.logo = url.trim();
+  populateLogoEditor();
+
+  const navLogo = document.getElementById('navBrandLogoImg');
+  if (navLogo) navLogo.src = url.trim();
+  const footerLogo = document.getElementById('footerBrandLogoImg');
+  if (footerLogo) footerLogo.src = url.trim();
+
+  window.saveCompanyData(currentData);
+}
+
+function restoreDefaultLogo() {
+  const defaultLogo = 'assets/images/LOGOTIPO_CONCRETA.png';
+  currentData.info.logo = defaultLogo;
+  populateLogoEditor();
+
+  const navLogo = document.getElementById('navBrandLogoImg');
+  if (navLogo) navLogo.src = defaultLogo;
+  const footerLogo = document.getElementById('footerBrandLogoImg');
+  if (footerLogo) footerLogo.src = defaultLogo;
+
+  window.saveCompanyData(currentData);
+  alert('Logo restaurado a la versión predeterminada.');
+}
+
+/* --- Renderizar y Seleccionar Temas / Paletas --- */
+function renderThemePresetsInEditor() {
+  const container = document.getElementById('themePresetsGrid');
+  if (!container) return;
+
+  const presets = window.THEME_PRESETS || {};
+  const currentPresetId = (currentData.tema && currentData.tema.plantilla) || 'emerald';
+
+  container.innerHTML = Object.keys(presets).map(key => {
+    const p = presets[key];
+    const c = p.colores;
+    const isActive = currentPresetId === key ? 'active' : '';
+    return `
+      <div class="preset-card ${isActive}" onclick="selectPresetTheme('${key}')">
+        <div class="preset-name">${p.nombre}</div>
+        <div class="swatch-row">
+          <div class="swatch-chip" style="background:${c.bgDeep};"></div>
+          <div class="swatch-chip" style="background:${c.bgCard};"></div>
+          <div class="swatch-chip" style="background:${c.verdeBrand};"></div>
+          <div class="swatch-chip" style="background:${c.textMain};"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectPresetTheme(presetId) {
+  const presets = window.THEME_PRESETS || {};
+  const preset = presets[presetId];
+  if (!preset) return;
+
+  currentData.tema = {
+    plantilla: presetId,
+    colores: { ...preset.colores }
+  };
+
+  // Aplicar inmediatamente en el documento
+  applyTheme(currentData.tema);
+  renderThemePresetsInEditor();
+  populateColorPickers();
+  window.saveCompanyData(currentData);
+}
+
+function populateColorPickers() {
+  const c = (currentData.tema && currentData.tema.colores) || {};
+  setColorPickerVal('pickBrandColor', 'hexBrandColor', c.verdeBrand || '#3eb828');
+  setColorPickerVal('pickBgDeep', 'hexBgDeep', c.bgDeep || '#090c0e');
+  setColorPickerVal('pickBgCard', 'hexBgCard', c.bgCard || '#161c22');
+  setColorPickerVal('pickTextMain', 'hexTextMain', c.textMain || '#f1f5f9');
+}
+
+function setColorPickerVal(inputId, textId, value) {
+  const input = document.getElementById(inputId);
+  const text = document.getElementById(textId);
+  if (input) input.value = value;
+  if (text) text.textContent = value;
+}
+
+function handleCustomColorChange(colorKey, hexValue) {
+  if (!currentData.tema) currentData.tema = { plantilla: 'custom', colores: {} };
+  currentData.tema.plantilla = 'custom';
+  currentData.tema.colores[colorKey] = hexValue;
+
+  // Actualizar texto hexadecimal
+  if (colorKey === 'verdeBrand') {
+    document.getElementById('hexBrandColor').textContent = hexValue;
+    currentData.tema.colores.verdeDark = adjustBrightness(hexValue, -20);
+    currentData.tema.colores.verdeLight = adjustBrightness(hexValue, 20);
+  } else if (colorKey === 'bgDeep') {
+    document.getElementById('hexBgDeep').textContent = hexValue;
+  } else if (colorKey === 'bgCard') {
+    document.getElementById('hexBgCard').textContent = hexValue;
+  } else if (colorKey === 'textMain') {
+    document.getElementById('hexTextMain').textContent = hexValue;
+  }
+
+  // Desmarcar presets activos
+  document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+
+  // Aplicar inmediatamente
+  applyTheme(currentData.tema);
+  window.saveCompanyData(currentData);
+}
+
+/* --- Editor de Galería de Proyectos (Fotos y Contenido) --- */
+function renderProjectsEditorList() {
+  const container = document.getElementById('projectsEditorContainer');
+  if (!container) return;
+
+  const proyectos = currentData.proyectos || [];
+  container.innerHTML = proyectos.map((p, idx) => `
+    <div class="project-edit-card" id="projCard-${p.id}">
+      <div class="project-edit-header">
+        <img src="${p.imagen}" alt="${p.nombre}" class="project-edit-thumb" id="projThumb-${p.id}">
+        <div style="flex:1;">
+          <div style="font-weight:700; font-size:14px; color:#fff; margin-bottom:4px;">${p.nombre || 'Nuevo Proyecto'}</div>
+          <div style="font-size:11px; color:var(--text-dim); margin-bottom:8px;">${p.categoriaLabel || p.categoria} · ${p.area || ''}</div>
+          <div class="file-upload-btn-wrap">
+            <button class="btn btn-secondary" style="font-size:10px; padding:4px 10px;">
+              <span class="material-symbols-outlined" style="font-size:14px;">upload</span>
+              <span>Cambiar Foto (Subir PC)</span>
+            </button>
+            <input type="file" accept="image/*" onchange="handleProjectPhotoUpload('${p.id}', event)">
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="deleteProject('${p.id}')" title="Eliminar este proyecto" style="color:#f87171; border-color:rgba(248,113,113,0.3); padding:6px 10px;">
+          <span class="material-symbols-outlined" style="font-size:16px;">delete</span>
+        </button>
+      </div>
+
+      <div class="project-edit-grid-2">
+        <div class="form-group-custom">
+          <label class="form-label-custom">Nombre</label>
+          <input type="text" class="form-input-custom" value="${p.nombre || ''}" onchange="updateProjectField('${p.id}', 'nombre', this.value)" style="font-size:12px; padding:8px 10px;">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Categoría</label>
+          <select class="form-select-custom" onchange="updateProjectField('${p.id}', 'categoria', this.value)" style="font-size:12px; padding:8px 10px;">
+            <option value="residencial" ${p.categoria === 'residencial' ? 'selected' : ''}>Residencial Campestre</option>
+            <option value="hospitality" ${p.categoria === 'hospitality' ? 'selected' : ''}>Hospitality & Hoteles</option>
+            <option value="piscinas" ${p.categoria === 'piscinas' ? 'selected' : ''}>Piscinas & Zonas Húmedas</option>
+            <option value="estructural" ${p.categoria === 'estructural' ? 'selected' : ''}>Diseño Estructural / Comercial</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="project-edit-grid-2">
+        <div class="form-group-custom">
+          <label class="form-label-custom">Ubicación</label>
+          <input type="text" class="form-input-custom" value="${p.ubicación || ''}" onchange="updateProjectField('${p.id}', 'ubicación', this.value)" style="font-size:12px; padding:8px 10px;">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Área Construida</label>
+          <input type="text" class="form-input-custom" value="${p.area || ''}" onchange="updateProjectField('${p.id}', 'area', this.value)" style="font-size:12px; padding:8px 10px;" placeholder="Ej: 450 m²">
+        </div>
+      </div>
+
+      <div class="form-group-custom">
+        <label class="form-label-custom">URL de Imagen (o usa el botón de subir)</label>
+        <input type="text" class="form-input-custom" value="${p.imagen.startsWith('data:') ? '' : p.imagen}" onchange="updateProjectField('${p.id}', 'imagen', this.value)" placeholder="assets/images/..." style="font-size:12px; padding:8px 10px;">
+      </div>
+
+      <div class="form-group-custom">
+        <label class="form-label-custom">Descripción de la Obra</label>
+        <textarea class="form-input-custom" rows="2" onchange="updateProjectField('${p.id}', 'descripcion', this.value)" style="font-size:12px; padding:8px 10px;">${p.descripcion || ''}</textarea>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleProjectPhotoUpload(projectId, e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert('La fotografía seleccionada supera los 5MB.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const dataUrl = evt.target.result;
+    const project = (currentData.proyectos || []).find(p => p.id === projectId);
+    if (project) {
+      project.imagen = dataUrl;
+      const thumb = document.getElementById(`projThumb-${projectId}`);
+      if (thumb) thumb.src = dataUrl;
+      renderProjects(currentData, currentProjectFilter);
+      window.saveCompanyData(currentData);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateProjectField(projectId, field, value) {
+  const project = (currentData.proyectos || []).find(p => p.id === projectId);
+  if (!project) return;
+
+  project[field] = value;
+  if (field === 'categoria') {
+    const labels = {
+      residencial: "Residencial Campestre",
+      hospitality: "Hospitality & Zonas Húmedas",
+      piscinas: "Piscinas & Spas",
+      estructural: "Diseño Estructural"
+    };
+    project.categoriaLabel = labels[value] || value;
+  }
+
+  renderProjects(currentData, currentProjectFilter);
+  window.saveCompanyData(currentData);
+}
+
+function addNewProjectToEditor() {
+  const newId = 'obra-' + Date.now().toString().slice(-4);
+  const newProj = {
+    id: newId,
+    nombre: "Nueva Obra Arquitectónica",
+    categoria: "residencial",
+    categoriaLabel: "Residencial Campestre",
+    ubicación: "Pereira, Risaralda",
+    area: "350 m²",
+    ano: new Date().getFullYear().toString(),
+    imagen: "assets/images/CAMPESTRE.JPG",
+    descripcion: "Construcción moderna llave en mano con acabados de primera calidad e ingeniería sismorresistente.",
+    aspectos: ["Diseño bioclimático", "Estructura sismorresistente", "Acabados prémium"]
+  };
+
+  if (!currentData.proyectos) currentData.proyectos = [];
+  currentData.proyectos.unshift(newProj);
+
+  renderProjectsEditorList();
+  renderProjects(currentData, currentProjectFilter);
+  window.saveCompanyData(currentData);
+}
+
+function deleteProject(projectId) {
+  if (confirm('¿Deseas eliminar este proyecto del portafolio?')) {
+    currentData.proyectos = (currentData.proyectos || []).filter(p => p.id !== projectId);
+    renderProjectsEditorList();
+    renderProjects(currentData, currentProjectFilter);
+    window.saveCompanyData(currentData);
+  }
+}
+
+/* --- Guardar y Exportar --- */
 function applyAndSaveEditorChanges() {
   currentData.info.nombre = document.getElementById('editNombre').value;
   currentData.info.subtitulo = document.getElementById('editSubtitulo').value;
   currentData.info.sloganPrincipal = document.getElementById('editSloganPrincipal').value;
   currentData.info.sloganSub = document.getElementById('editSloganSub').value;
   currentData.info.cobertura = document.getElementById('editPillText').value;
+  currentData.info.videoYoutubeId = document.getElementById('editYoutubeId').value.trim() || 'gQDHFTBZWUk';
 
   currentData.contacto.whatsapp = document.getElementById('editWhatsapp').value.replace(/[^0-9]/g, '');
   currentData.contacto.whatsappDisplay = document.getElementById('editWhatsappDisplay').value;
@@ -465,10 +855,11 @@ function applyAndSaveEditorChanges() {
   // Persistir en localStorage
   window.saveCompanyData(currentData);
 
-  // Re-renderizar todo el sitio de inmediato
+  // Aplicar tema y re-renderizar todo el sitio
+  applyTheme(currentData.tema);
   renderAllSections(currentData);
 
-  alert('¡Datos de la empresa actualizados y guardados exitosamente en tu navegador!');
+  alert('¡Estilos, logo, proyectos e información actualizados y guardados exitosamente!');
   closeCompanyEditor();
 }
 
@@ -511,6 +902,7 @@ function resetCompanyData() {
   }
 }
 
+window.THEME_PRESETS = ${JSON.stringify(window.THEME_PRESETS || {}, null, 2)};
 window.DEFAULT_COMPANY_DATA = DEFAULT_COMPANY_DATA;
 window.getCompanyData = getCompanyData;
 window.saveCompanyData = saveCompanyData;
@@ -534,16 +926,17 @@ function downloadUpdatedConfigFile() {
 function copyConfigCode() {
   const content = generateConfigJsString();
   navigator.clipboard.writeText(content).then(() => {
-    alert('Código copiado al portapapeles. Puedes pegarlo directamente en company-data.js en tu repositorio de GitHub.');
+    alert('Código copiado al portapapeles. Puedes pegarlo en company-data.js en tu repositorio de GitHub.');
   }).catch(() => {
     alert('No se pudo copiar automáticamente. Por favor descarga el archivo.');
   });
 }
 
 function restoreDefaults() {
-  if (confirm('¿Estás seguro de que deseas restablecer los datos a los valores originales de Concreta?')) {
+  if (confirm('¿Estás seguro de que deseas restablecer TODOS los estilos, logo, proyectos y datos a los valores originales?')) {
     window.resetCompanyData();
     currentData = window.DEFAULT_COMPANY_DATA;
+    applyTheme(currentData.tema);
     renderAllSections(currentData);
     closeCompanyEditor();
     alert('Valores predeterminados restaurados.');

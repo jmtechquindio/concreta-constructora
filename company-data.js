@@ -3,16 +3,98 @@
  * =====================================
  * Archivo de Configuración de Datos de la Empresa
  * 
- * Puedes editar cualquier información de este archivo directamente,
- * o usar el botón flotante "⚙️ Editar Empresa" en el sitio web para
- * editar visualmente y descargar la configuración actualizada.
+ * Incluye configuración de:
+ * - Datos Generales, Textos, Slogans
+ * - Logo e Imágenes de Proyectos
+ * - Temas y Paletas de Colores (Plantillas predeterminadas y Personalizado)
+ * - Canales de Contacto y Métricas
  */
+
+// Plantillas de Estilos y Colores Predeterminadas
+const THEME_PRESETS = {
+  emerald: {
+    id: "emerald",
+    nombre: "Concreta Esmeralda (Predeterminado)",
+    tipo: "dark",
+    colores: {
+      verdeBrand: "#3eb828",
+      verdeDark: "#2f941c",
+      verdeLight: "#52cf3a",
+      bgDeep: "#090c0e",
+      bgSurface: "#111519",
+      bgCard: "#161c22",
+      textMain: "#f1f5f9",
+      textMuted: "#94a3b8"
+    }
+  },
+  gold: {
+    id: "gold",
+    nombre: "Oro & Obsidiana (Luxury Architecture)",
+    tipo: "dark",
+    colores: {
+      verdeBrand: "#f59e0b",
+      verdeDark: "#d97706",
+      verdeLight: "#fbbf24",
+      bgDeep: "#0a0a0d",
+      bgSurface: "#131318",
+      bgCard: "#1a1a24",
+      textMain: "#fef3c7",
+      textMuted: "#a8a29e"
+    }
+  },
+  blue: {
+    id: "blue",
+    nombre: "Azul Titanio & Acero Estructural",
+    tipo: "dark",
+    colores: {
+      verdeBrand: "#0ea5e9",
+      verdeDark: "#0284c7",
+      verdeLight: "#38bdf8",
+      bgDeep: "#070b12",
+      bgSurface: "#0d1522",
+      bgCard: "#131f32",
+      textMain: "#f0f9ff",
+      textMuted: "#94a3b8"
+    }
+  },
+  terracotta: {
+    id: "terracotta",
+    nombre: "Terracota & Bio-Construcción",
+    tipo: "dark",
+    colores: {
+      verdeBrand: "#f97316",
+      verdeDark: "#c2410c",
+      verdeLight: "#fb923c",
+      bgDeep: "#0c0a09",
+      bgSurface: "#181412",
+      bgCard: "#221c18",
+      textMain: "#fff7ed",
+      textMuted: "#a8a29e"
+    }
+  },
+  minimal_light: {
+    id: "minimal_light",
+    nombre: "Estudio Blanco (Minimalist Light)",
+    tipo: "light",
+    colores: {
+      verdeBrand: "#16a34a",
+      verdeDark: "#15803d",
+      verdeLight: "#22c55e",
+      bgDeep: "#f8fafc",
+      bgSurface: "#ffffff",
+      bgCard: "#f1f5f9",
+      textMain: "#0f172a",
+      textMuted: "#475569"
+    }
+  }
+};
 
 const DEFAULT_COMPANY_DATA = {
   // Información General
   info: {
     nombre: "Concreta",
     subtitulo: "Ingeniería y Arquitectura",
+    logo: "assets/images/LOGOTIPO_CONCRETA.png",
     sloganPrincipal: "Construimos lo que imaginas.",
     sloganSub: "Desde el diseño bioclimático hasta la entrega final de llaves. Acompañamos cada etapa de tu proyecto con ingeniería sismorresistente NSR-10, control estricto de costos y garantía certificada.",
     anoFundacion: 2004,
@@ -23,6 +105,12 @@ const DEFAULT_COMPANY_DATA = {
     cobertura: "Pereira · Risaralda · Eje Cafetero · Antioquia",
     videoYoutubeId: "gQDHFTBZWUk", // ID de video de YouTube para el fondo del Hero
     visitaLoteGratis: true,
+  },
+
+  // Tema y Estilos Visuales
+  tema: {
+    plantilla: "emerald", // "emerald", "gold", "blue", "terracotta", "minimal_light", "custom"
+    colores: { ...THEME_PRESETS.emerald.colores }
   },
 
   // Canales de Contacto
@@ -130,7 +218,7 @@ const DEFAULT_COMPANY_DATA = {
     }
   ],
 
-  // Portafolio de Proyectos Reales
+  // Portafolio de Proyectos Reales (Imágenes y contenido editables)
   proyectos: [
     {
       id: "petrasanta",
@@ -139,9 +227,8 @@ const DEFAULT_COMPANY_DATA = {
       categoriaLabel: "Hospitality & Zonas Húmedas",
       ubicación: "Guatapé / Risaralda",
       area: "1,200 m²",
-      ano: "2023 - 2024",
+      ano: "2024",
       imagen: "assets/images/HOTEL_BOUTIQUE_PESTRASANA_2.jpg",
-      imagenSecundaria: "assets/images/HOTEL_BOUTIQUE_PESTRASANA.jpg",
       descripcion: "Complejo boutique de lujo integrado al entorno natural con terrazas en voladizo, estructuras en madera tratada y concreto visto, y zonas húmedas de alta ingeniería.",
       aspectos: ["Zonas húmedas termales", "Acabados de lujo", "Integración paisajística", "Estructura sismorresistente"]
     },
@@ -154,7 +241,6 @@ const DEFAULT_COMPANY_DATA = {
       area: "480 m²",
       ano: "2023",
       imagen: "assets/images/CAMPESTRE.JPG",
-      imagenSecundaria: "assets/images/CAMPESTRE_DETRAS.JPG",
       descripcion: "Vivienda unifamiliar de arquitectura contemporánea con doble altura, amplios ventanales bioclimáticos que maximizan la vista al valle y eficiencia energética.",
       aspectos: ["Diseño bioclimático", "Doble altura", "Iluminación natural cenital", "Concreto arquitectónico"]
     },
@@ -164,10 +250,9 @@ const DEFAULT_COMPANY_DATA = {
       categoria: "piscinas",
       categoriaLabel: "Residencial & Zonas Húmedas",
       ubicación: "Pereira, Risaralda",
-      area: "350 m² + 90 m² Zona Húmeda",
+      area: "350 m² + 90 m² Piscina",
       ano: "2024",
       imagen: "assets/images/EMUNAH_3.jpeg",
-      imagenSecundaria: "assets/images/EMUNAH_4.jpeg",
       descripcion: "Proyecto residencial con piscina sinfín con borde infinito de cristal, jacuzzi climatizado con hidromasaje y solárium en deck ecológico.",
       aspectos: ["Piscina de borde infinito", "Climatización solar", "Deck en madera sintética", "Automatización de filtrado"]
     },
@@ -180,7 +265,6 @@ const DEFAULT_COMPANY_DATA = {
       area: "620 m²",
       ano: "2024",
       imagen: "assets/images/CAMPESTRE_DETRAS.JPG",
-      imagenSecundaria: "assets/images/CAMPESTRE.JPG",
       descripcion: "Construcción campestre con cerramientos panorámicos, zona social integrada a pérgolas de acero estructural y cocina abierta de alto concepto.",
       aspectos: ["Estructura mixta acero/concreto", "Pérgolas exteriores", "Cocina integrada", "Paisajismo autóctono"]
     },
@@ -193,7 +277,6 @@ const DEFAULT_COMPANY_DATA = {
       area: "280 m²",
       ano: "2023",
       imagen: "assets/images/HOTEL_BOUTIQUE_PESTRASANA.jpg",
-      imagenSecundaria: "assets/images/HOTEL_BOUTIQUE_PESTRASANA_2.jpg",
       descripcion: "Diseño hidráulico y ejecución de circuito termal con piscina hidroterapéutica, cascada en piedra natural y sistemas de desinfección salina.",
       aspectos: ["Desinfección por electrólisis salina", "Enchape importado antideslizante", "Iluminación domótica", "Cascadas integradas"]
     }
@@ -279,7 +362,17 @@ function getCompanyData() {
     const saved = localStorage.getItem("concreta_custom_company_data");
     if (saved) {
       const parsed = JSON.parse(saved);
-      return { ...DEFAULT_COMPANY_DATA, ...parsed };
+      return {
+        ...DEFAULT_COMPANY_DATA,
+        ...parsed,
+        info: { ...DEFAULT_COMPANY_DATA.info, ...(parsed.info || {}) },
+        tema: {
+          ...DEFAULT_COMPANY_DATA.tema,
+          ...(parsed.tema || {}),
+          colores: { ...DEFAULT_COMPANY_DATA.tema.colores, ...((parsed.tema && parsed.tema.colores) || {}) }
+        },
+        contacto: { ...DEFAULT_COMPANY_DATA.contacto, ...(parsed.contacto || {}) }
+      };
     }
   } catch (e) {
     console.warn("No se pudo leer datos locales, usando configuración predeterminada", e);
@@ -309,6 +402,7 @@ function resetCompanyData() {
 }
 
 // Exportar globalmente
+window.THEME_PRESETS = THEME_PRESETS;
 window.DEFAULT_COMPANY_DATA = DEFAULT_COMPANY_DATA;
 window.getCompanyData = getCompanyData;
 window.saveCompanyData = saveCompanyData;

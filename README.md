@@ -15,7 +15,7 @@ Sitio web oficial y rediseño moderno para **Concreta · Ingeniería y Arquitect
   - Video de fondo en el Hero (producción real de Concreta) con controles y overlay de alto contraste.
 - **Portafolio Dinámico con Lightbox:**
   - Proyectos reales: *Hotel Boutique Petrasanta*, *Casa Campestre Combia*, *Proyecto Emunah*, *Zonas Húmedas & Spas*.
-  - Filtro por categorías (Residencial, Hospitality, Piscinas).
+  - Filtro por categorías (Residencial, Hospitality, Piscinas, Estructuras).
   - Modal interactivo con especificaciones técnicas completas y botón directo de cotización para cada obra.
 - **Calculadora Interactiva de Inversión y Cronograma:**
   - Permite al cliente seleccionar área en m², tipo de terreno y obra.
@@ -26,41 +26,37 @@ Sitio web oficial y rediseño moderno para **Concreta · Ingeniería y Arquitect
 
 ---
 
-## 🛠️ Cómo Editar la Información Real de la Empresa
+## 🎨 Nuevo Panel de Personalización y Edición de Contenido
 
-El sitio cuenta con **dos métodos muy fáciles** para cambiar la información de la empresa (teléfonos, WhatsApp, dirección, proyectos, métricas, etc.):
+Haz clic en el botón flotante **`⚙️ Editar Empresa`** (o en **"Editar Info"** en la barra de navegación) para acceder a las nuevas herramientas visuales en vivo:
 
-### Método 1: Editor Visual en Vivo (Sin tocar código)
-1. Abre el sitio en tu navegador.
-2. Haz clic en el botón flotante **`⚙️ Editar Empresa`** en la esquina inferior izquierda (o en la barra de navegación).
-3. Modifica los textos, teléfonos de WhatsApp, dirección física, métricas de experiencia, etc.
-4. Presiona **"Guardar y Aplicar"** para ver los cambios instantáneamente y guardarlos en tu navegador.
-5. Ve a la pestaña **"Exportar / GitHub"** para descargar el archivo `company-data.js` actualizado con un solo clic.
+### 1. Apartado de Estilos y Colores:
+- **Plantillas Predeterminadas:**
+  - *Concreta Esmeralda* (Predeterminado)
+  - *Oro & Obsidiana* (Luxury Architecture)
+  - *Azul Titanio & Acero Estructural*
+  - *Terracota & Bio-Construcción*
+  - *Estudio Blanco* (Minimalist Light)
+- **Modo Personalizado:**
+  - Selectores de color en tiempo real para Color Primario/Marca, Fondo Principal, Fondo de Tarjetas y Color de Texto.
 
-### Método 2: Editando directamente `company-data.js`
-Abre el archivo [`company-data.js`](company-data.js) en cualquier editor de código o directamente en GitHub:
-```javascript
-const DEFAULT_COMPANY_DATA = {
-  info: {
-    nombre: "Concreta",
-    subtitulo: "Ingeniería y Arquitectura",
-    sloganPrincipal: "Construimos lo que imaginas.",
-    experienciaAnos: "20+",
-    proyectosEntregados: "50+",
-    garantia: "1 año contractual",
-    // ...
-  },
-  contacto: {
-    whatsapp: "573023376241", // Número para recepción de cotizaciones
-    whatsappDisplay: "+57 302 337 6241",
-    email: "contacto@concretaconstructora.com",
-    direccion: "Edificio Quality, Cra. 17 #11-10",
-    ciudad: "Pereira, Risaralda",
-    // ...
-  }
-};
-```
-Haz commit a la rama `main` y GitHub Pages se actualizará automáticamente en segundos.
+### 2. Apartado de Logo e Imágenes:
+- **Logo de la Empresa:**
+  - Sube tu logo directamente desde tu computador (PNG, SVG, JPG, WebP) o ingresa una URL externa.
+  - Se actualiza automáticamente en el Navbar, Footer y vistas previas.
+- **Fondo del Hero:**
+  - Modifica el ID del video de YouTube en el Hero.
+- **Galería de Proyectos:**
+  - Sube fotografías de tus obras desde tu computador o pega URLs.
+  - Edita nombre, categoría, ubicación, área construida (m²) y descripción de cada proyecto.
+  - Agrega nuevos proyectos con el botón **"+ Nuevo Proyecto"** o elimina los que no necesites.
+
+### 3. Datos Generales, Contacto y Métricas:
+- Edita nombre de la empresa, eslogan, píldora de estado, números de WhatsApp, correos, dirección y métricas de años/proyectos.
+
+### 4. Guardar y Exportar a GitHub:
+- Los cambios se aplican al instante y se guardan en el navegador (`localStorage`).
+- Con el botón **"Descargar company-data.js Actualizado"** o **"Copiar Código"** puedes guardar la configuración permanentemente en tu repositorio de GitHub.
 
 ---
 
@@ -68,10 +64,10 @@ Haz commit a la rama `main` y GitHub Pages se actualizará automáticamente en s
 
 ```
 concreta-constructora/
-├── index.html            # Estructura semántica, accesibilidad y componentes
-├── style.css             # Estilos modernos, diseño responsive, tipografías y animaciones
-├── app.js                # Lógica interactiva, filtros, modal, calculadora y editor
-├── company-data.js       # Archivo maestro de configuración editable
+├── index.html            # Estructura semántica, accesibilidad y panel de edición
+├── style.css             # Estilos modernos, temas oscuro/claro, diseño responsive
+├── app.js                # Lógica interactiva, filtros, modal, calculadora, temas y gestor de fotos
+├── company-data.js       # Archivo maestro de configuración editable y presets de temas
 ├── assets/
 │   └── images/           # Renders y fotografías originales de proyectos reales
 └── README.md             # Documentación del proyecto
