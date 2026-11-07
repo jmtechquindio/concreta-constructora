@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concreta · Ingeniería y Arquitectura | Construcción en Pereira y Eje Cafetero</title>
+  <meta name="description" content="Empresa líder en ingeniería y arquitectura en Pereira, Risaralda y Antioquia. Diseño arquitectónico, cálculo estructural NSR-10, licencias de curaduría, piscinas y construcción llave en mano con garantía de 1 año.">
+  <link rel="icon" type="image/png" href="assets/images/LOGOTIPO_CONCRETA.png">
+  
+  <!-- Open Graph / Meta Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Concreta · Ingeniería y Arquitectura">
+  <meta property="og:description" content="Construimos lo que imaginas. Desde el diseño hasta la entrega final con garantía de 1 año.">
+  <meta property="og:image" content="assets/images/HOTEL_BOUTIQUE_PESTRASANA_2.jpg">
+
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="blueprint-grid">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="nav-fixed" id="navbar">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo-wrap" id="navBrandLogo">
+        <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Concreta Logo" class="brand-logo-img">
+        <div>
+          <span class="brand-text-name" id="brandTitle">CONCRETA <span>·</span></span>
+          <span class="brand-text-tag" id="brandTag">INGENIERÍA & ARQUITECTURA</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#portafolio">Portafolio</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
+        <li><a href="#metodologia">Proceso</a></li>
+        <li><a href="#piscinas">Piscinas</a></li>
+        <li><a href="#nosotros">Por Qué Elegirnos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary nav-cta-desktop" onclick="openCompanyEditor()" title="Personalizar información de la empresa">
+          <span class="material-symbols-outlined" style="font-size:16px;">edit_note</span>
+          <span>Editar Info</span>
+        </button>
+        <a href="https://wa.me/573023376241?text=Hola%20Concreta,%20quiero%20cotizar%20un%20proyecto" target="_blank" class="btn btn-primary nav-cta-desktop" id="navWaBtn">
+          <span>Cotizar Proyecto</span>
+          <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+        </a>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Abrir Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#servicios" onclick="closeMobileNav()">Servicios</a>
+    <a href="#portafolio" onclick="closeMobileNav()">Portafolio de Obras</a>
+    <a href="#calculadora" onclick="closeMobileNav()">Calculadora de Inversión</a>
+    <a href="#metodologia" onclick="closeMobileNav()">Metodología en 4 Etapas</a>
+    <a href="#piscinas" onclick="closeMobileNav()">Piscinas y Zonas Húmedas</a>
+    <a href="#nosotros" onclick="closeMobileNav()">Por Qué Elegirnos</a>
+    <a href="#contacto" onclick="closeMobileNav()">Contacto y Sede</a>
+    <button class="btn btn-secondary" onclick="openCompanyEditor(); closeMobileNav();" style="width:100%; margin-top:8px;">
+      <span class="material-symbols-outlined">settings</span>
+      <span>Editar Datos de Empresa</span>
+    </button>
+    <a href="https://wa.me/573023376241?text=Hola%20Concreta,%20quiero%20cotizar%20un%20proyecto" target="_blank" class="btn btn-primary" id="mobileWaBtn" style="width:100%; margin-top:8px;">
+      <span>Cotizar por WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="hero-section" id="hero">
+    <div class="hero-video-bg">
+      <iframe id="heroVideoIframe" src="https://www.youtube.com/embed/gQDHFTBZWUk?autoplay=1&mute=1&loop=1&playlist=gQDHFTBZWUk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" title="Concreta Video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+      <div class="hero-status-pill">
+        <span class="pulse-dot"></span>
+        <span id="heroPillText">OBRAS ACTIVAS EN RISARALDA & ANTIOQUIA · ASESORÍA Y VISITA AL LOTE SIN COSTO</span>
+      </div>
+
+      <h1 class="hero-title" id="heroHeadline">
+        CONSTRUIMOS<br>
+        LO QUE <span class="highlight">IMAGINAS.</span>
+      </h1>
+
+      <p class="hero-desc" id="heroDescription">
+        Desde el diseño bioclimático hasta la entrega final de llaves. Acompañamos cada etapa de tu proyecto con ingeniería sismorresistente NSR-10, control estricto de costos y garantía contractual certificada.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://wa.me/573023376241?text=Hola%20Concreta,%20quiero%20iniciar%20un%20proyecto" target="_blank" class="btn btn-primary" id="heroCtaPrimary">
+          <span class="material-symbols-outlined">chat</span>
+          <span>Iniciar mi Proyecto</span>
+        </a>
+        <a href="#portafolio" class="btn btn-secondary">
+          <span class="material-symbols-outlined">apartment</span>
+          <span>Ver Obras Entregadas</span>
+        </a>
+        <a href="#calculadora" class="btn btn-ghost">
+          <span class="material-symbols-outlined">calculate</span>
+          <span>Calcular Presupuesto</span>
+        </a>
+      </div>
+
+      <!-- Stats Strip -->
+      <div class="hero-stats-strip">
+        <div class="stat-item">
+          <div class="stat-val" id="statYears">20+</div>
+          <div class="stat-lbl">Años de Trayectoria</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="statProjects">50+</div>
+          <div class="stat-lbl">Proyectos Entregados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="statWarranty">1 AÑO</div>
+          <div class="stat-lbl">Garantía Contractual</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="statCoverage">100%</div>
+          <div class="stat-lbl">Visita al Lote Gratis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRUST RIBBON ================= -->
+  <div class="trust-ribbon">
+    <div class="container">
+      <div class="trust-grid" id="trustGridContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SERVICIOS ================= -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Capacidades Técnicas</span>
+          <h2 class="section-title">Ingeniería Integral<br>Sin Fragmentación</h2>
+        </div>
+        <p class="section-desc">
+          No subcontratamos el éxito de tu obra. Centralizamos en un solo equipo el diseño arquitectónico, el cálculo estructural sismorresistente, las licencias y la construcción.
+        </p>
+      </div>
+
+      <div class="services-bento" id="servicesBentoContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PORTAFOLIO ================= -->
+  <section class="section section-alt" id="portafolio">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Obras Reales</span>
+          <h2 class="section-title">Portafolio que<br>Habla por Nosotros</h2>
+        </div>
+        <div>
+          <a href="https://wa.me/573023376241?text=Hola,%20quisiera%20conocer%20m%C3%A1s%20detalles%20de%20sus%20proyectos" target="_blank" class="btn btn-secondary">
+            <span class="material-symbols-outlined">folder_shared</span>
+            <span>Solicitar Catálogo Completo</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="portfolio-filter-bar">
+        <button class="filter-btn active" data-filter="all">Todos los Proyectos</button>
+        <button class="filter-btn" data-filter="residencial">Residencial Campestre</button>
+        <button class="filter-btn" data-filter="hospitality">Hospitality & Hoteles</button>
+        <button class="filter-btn" data-filter="piscinas">Piscinas & Zonas Húmedas</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-masonry" id="projectsGridContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CALCULADORA INTERACTIVA ================= -->
+  <section class="section" id="calculadora">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Simulador Inteligente</span>
+          <h2 class="section-title">Calcula el Alcance<br>de tu Proyecto</h2>
+        </div>
+        <p class="section-desc">
+          Configura los parámetros clave de tu idea para estimar tiempos de ejecución, entregables técnicos y enviar una solicitud con datos precisos por WhatsApp.
+        </p>
+      </div>
+
+      <div class="calc-wrapper">
+        <!-- Form Controls -->
+        <div class="calc-form-col">
+          <div class="form-group-custom">
+            <label class="form-label-custom">Tipo de Proyecto</label>
+            <select class="form-select-custom" id="calcProjectType">
+              <option value="campestre">Vivienda Campestre Nueva (Obra Llave en Mano)</option>
+              <option value="piscina">Piscina de Lujo / Zona Húmeda / Spa</option>
+              <option value="remodelacion">Remodelación o Ampliación de Alta Gama</option>
+              <option value="diseno">Diseño Arquitectónico + Cálculo Estructural NSR-10</option>
+              <option value="comercial">Local Comercial / Hotel Boutique</option>
+            </select>
+          </div>
+
+          <div class="form-group-custom">
+            <div class="form-label-custom">
+              <span>Área Estimada de Construcción</span>
+              <span id="calcAreaDisplay" style="color:var(--verde-brand); font-weight:700;">250 m²</span>
+            </div>
+            <div class="calc-range-wrap">
+              <span style="font-size:12px; color:var(--text-dim);">50 m²</span>
+              <input type="range" class="calc-range-slider" id="calcAreaRange" min="50" max="1500" step="10" value="250">
+              <span style="font-size:12px; color:var(--text-dim);">1500 m²</span>
+            </div>
+          </div>
+
+          <div class="form-group-custom">
+            <label class="form-label-custom">Estado del Terreno / Lote</label>
+            <select class="form-select-custom" id="calcTerrain">
+              <option value="lote_plano">Lote plano con servicios públicos disponibles</option>
+              <option value="lote_pendiente">Lote con pendiente moderada / topografía quebrada</option>
+              <option value="lote_sin_servicios">Lote rural sin acometidas hidrosanitarias definidas</option>
+              <option value="construccion_existente">Edificación existente para intervenir</option>
+            </select>
+          </div>
+
+          <div class="form-group-custom">
+            <label class="form-label-custom">Ubicación del Proyecto</label>
+            <select class="form-select-custom" id="calcLocation">
+              <option value="pereira">Pereira / Risaralda (Cerritos, Combia, Dosquebradas)</option>
+              <option value="quindio">Quindío (Armenia, Circasia, Montenegro, La Tebaida)</option>
+              <option value="caldas">Caldas (Manizales, Chinchiná, Villamaría)</option>
+              <option value="antioquia">Antioquia (Medellín, Oriente Antioqueño, Rionegro)</option>
+              <option value="otra">Otra Región de Colombia</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Output Summary -->
+        <div class="calc-output-col">
+          <div>
+            <h3 class="calc-summary-title">Desglose Técnico Estimado</h3>
+            <div class="calc-spec-row">
+              <span class="calc-spec-label">Tiempo Estimado de Obra:</span>
+              <span class="calc-spec-val" id="calcTimeVal">6 a 8 Meses</span>
+            </div>
+            <div class="calc-spec-row">
+              <span class="calc-spec-label">Equipo Asignado:</span>
+              <span class="calc-spec-val" id="calcTeamVal">Arq. Director + Ing. Residente</span>
+            </div>
+            <div class="calc-spec-row">
+              <span class="calc-spec-label">Entregables Clave:</span>
+              <span class="calc-spec-val" id="calcDeliverablesVal">Renders 3D + NSR-10 + Curaduría</span>
+            </div>
+            <div class="calc-spec-row">
+              <span class="calc-spec-label">Garantía Concreta:</span>
+              <span class="calc-spec-val" style="color:var(--verde-light);">1 Año Contractual Escrito</span>
+            </div>
+
+            <div class="calc-highlight-box">
+              <div class="calc-highlight-text">
+                💡 <strong>Visita al Lote Gratis:</strong> Antes de cualquier firma o compromiso económico, visitamos tu terreno sin costo para validar accesos y cimentación.
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="calcSendWaBtn" style="width:100%;" onclick="enviarCotizacionCalculada()">
+            <span class="material-symbols-outlined">send</span>
+            <span>Solicitar Cotización con estos Parámetros</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= METODOLOGÍA EN 4 ETAPAS ================= -->
+  <section class="section section-alt" id="metodologia">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Rigor y Transparencia</span>
+          <h2 class="section-title">De la Idea a la Llave en Mano</h2>
+        </div>
+        <p class="section-desc">
+          Nuestro método de trabajo elimina la incertidumbre de la construcción. Sabrás en todo momento tiempos, avances y desembolsos programados.
+        </p>
+      </div>
+
+      <div class="process-grid" id="processGridContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECCIÓN ESPECIAL PISCINAS ================= -->
+  <section class="section" id="piscinas">
+    <div class="container">
+      <div style="background:var(--bg-card); border:1px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; display:grid; grid-template-columns:1fr 1fr; gap:0;">
+        <div style="position:relative; min-height:420px;">
+          <img src="assets/images/EMUNAH_3.jpeg" alt="Piscina Emunah" style="width:100%; height:100%; object-fit:cover; display:block;">
+          <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(9,12,14,0.1), rgba(22,28,34,0.95));"></div>
+        </div>
+        <div style="padding:48px; display:flex; flex-direction:column; justify-content:center;">
+          <span class="section-eyebrow">Especialidad Hidráulica</span>
+          <h2 class="section-title" style="font-size:36px; margin-bottom:16px;">Piscinas, Jacuzzis y Zonas Húmedas</h2>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:24px;">
+            Diseñamos y ejecutamos piscinas sinfín, cascadas en piedra natural, jacuzzis climatizados inteligentes y spas térmicos. Cero filtraciones con impermeabilización bicomponente y bombeo con filtración salina.
+          </p>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px;">
+            <li style="display:flex; align-items:center; gap:10px; font-size:13px; color:#cbd5e1;">
+              <span class="material-symbols-outlined" style="color:var(--verde-brand);">check_circle</span>
+              <span>Revestimientos en piedra bali, mosaico vítreo y microcemento</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:13px; color:#cbd5e1;">
+              <span class="material-symbols-outlined" style="color:var(--verde-brand);">check_circle</span>
+              <span>Climatización inteligente por bombas de calor o energía solar</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:10px; font-size:13px; color:#cbd5e1;">
+              <span class="material-symbols-outlined" style="color:var(--verde-brand);">check_circle</span>
+              <span>Iluminación subacuática LED domotizada</span>
+            </li>
+          </ul>
+          <div>
+            <a href="https://wa.me/573023376241?text=Hola,%20deseo%20cotizar%20el%20dise%C3%B1o%20o%20construcci%C3%B3n%20de%20una%20piscina" target="_blank" class="btn btn-primary">
+              <span>Cotizar mi Piscina</span>
+              <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= POR QUÉ ELEGIRNOS ================= -->
+  <section class="section section-alt" id="nosotros">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Diferencial Concreta</span>
+          <h2 class="section-title">Por Qué Somos Diferentes<br>en el Mercado</h2>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:40px; align-items:center;">
+        <div style="position:relative; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-strong);">
+          <img src="assets/images/EMUNAH_4.jpeg" alt="Proyecto Concreta" style="width:100%; height:460px; object-fit:cover; display:block;">
+          <div style="position:absolute; bottom:24px; left:24px; right:24px; background:rgba(9,12,14,0.9); backdrop-filter:blur(8px); padding:20px; border-radius:var(--radius-sm); border:1px solid var(--border-strong);">
+            <div style="font-family:var(--font-display); font-size:28px; font-weight:800; color:var(--verde-brand); line-height:1;">1 AÑO</div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:1px; color:#ffffff; text-transform:uppercase;">Garantía Escrita sobre Toda la Ejecución</div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:20px;" id="diferencialesContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIOS ================= -->
+  <section class="section" id="testimonios">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Reputación Comprobada</span>
+          <h2 class="section-title">Confianza Ganada en Obra</h2>
+        </div>
+      </div>
+
+      <div class="testi-grid" id="testiGridContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BANNER GARANTÍA ================= -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="garantia-banner">
+        <div class="garantia-seal">
+          <span class="material-symbols-outlined" style="font-size:38px;">verified</span>
+        </div>
+        <h2 class="garantia-title">Garantía Escrita de <span>1 Año</span><br>sobre Toda Nuestra Ejecución</h2>
+        <p class="garantia-desc">
+          Si se presentan fallas o desajustes atribuibles a nuestros procesos constructivos tras la entrega formal, realizamos las correcciones inmediatas y asumimos el 100% de los costos de reparación.
+        </p>
+        <a href="https://wa.me/573023376241?text=Hola,%20quiero%20agendar%20una%20visita%20a%20mi%20lote" target="_blank" class="btn btn-primary">
+          <span class="material-symbols-outlined">event_available</span>
+          <span>Agendar Visita al Lote sin Costo</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACTO Y SEDE ================= -->
+  <section class="section section-alt" id="contacto">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">Hablemos de tu Obra</span>
+          <h2 class="section-title">Inicia tu Proyecto<br>con Ingenieros Expertos</h2>
+        </div>
+        <p class="section-desc">
+          Cuéntanos tus requerimientos. Te orientamos sobre los pasos constructivos, licencias urbanísticas y costos aproximados sin ningún compromiso.
+        </p>
+      </div>
+
+      <div class="contacto-grid">
+        <!-- Contact Information -->
+        <div class="contact-info-card">
+          <div class="contact-detail-row">
+            <div class="contact-icon-box">
+              <span class="material-symbols-outlined">location_on</span>
+            </div>
+            <div>
+              <div class="contact-detail-title">Sede Física Principal</div>
+              <div class="contact-detail-val" id="contactAddress">Edificio Quality, Cra. 17 #11-10</div>
+              <div style="font-size:12px; color:var(--text-dim);" id="contactCity">Pereira, Risaralda · Colombia</div>
+            </div>
+          </div>
+
+          <div class="contact-detail-row">
+            <div class="contact-icon-box">
+              <span class="material-symbols-outlined">call</span>
+            </div>
+            <div>
+              <div class="contact-detail-title">Líneas Directas / WhatsApp</div>
+              <div class="contact-detail-val" id="contactPhoneDisplay">+57 302 337 6241</div>
+              <div style="font-size:12px; color:var(--text-dim);">Línea Secundaria: +57 322 727 3102</div>
+            </div>
+          </div>
+
+          <div class="contact-detail-row">
+            <div class="contact-icon-box">
+              <span class="material-symbols-outlined">mail</span>
+            </div>
+            <div>
+              <div class="contact-detail-title">Correo Electrónico</div>
+              <div class="contact-detail-val" id="contactEmail">contacto@concretaconstructora.com</div>
+            </div>
+          </div>
+
+          <div class="contact-detail-row">
+            <div class="contact-icon-box">
+              <span class="material-symbols-outlined">schedule</span>
+            </div>
+            <div>
+              <div class="contact-detail-title">Horarios de Asesoría</div>
+              <div class="contact-detail-val" style="font-size:13px; font-weight:500;" id="contactHours">Lunes a Viernes: 8:00 AM - 6:00 PM | Sábados: 9:00 AM - 1:00 PM</div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border-subtle);">
+            <a href="https://maps.google.com/?q=Edificio+Quality+Pereira+Cra+17+11-10" target="_blank" class="btn btn-secondary" style="width:100%;">
+              <span class="material-symbols-outlined">map</span>
+              <span>Abrir Ubicación en Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- WhatsApp Dispatch Form -->
+        <div class="contact-form-box">
+          <h3 style="font-family:var(--font-display); font-size:22px; font-weight:700; color:#fff; margin-bottom:16px;">
+            Envíanos un Mensaje Directo
+          </h3>
+          <p style="font-size:13px; color:var(--text-muted); margin-bottom:24px;">
+            Diligencia este formulario y se abrirá WhatsApp con todos tus datos organizados para brindarte atención inmediata.
+          </p>
+
+          <form id="contactForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-two-cols" style="margin-bottom:16px;">
+              <div class="form-group-custom">
+                <label class="form-label-custom">Nombre Completo</label>
+                <input type="text" class="form-input-custom" id="formName" placeholder="Tu nombre y apellido" required>
+              </div>
+              <div class="form-group-custom">
+                <label class="form-label-custom">Teléfono / WhatsApp</label>
+                <input type="tel" class="form-input-custom" id="formPhone" placeholder="Número de contacto" required>
+              </div>
+            </div>
+
+            <div class="form-two-cols" style="margin-bottom:16px;">
+              <div class="form-group-custom">
+                <label class="form-label-custom">Tipo de Obra</label>
+                <select class="form-select-custom" id="formType">
+                  <option value="Vivienda Nueva Campestre">Vivienda Nueva Campestre</option>
+                  <option value="Piscina o Zona Húmeda">Piscina o Zona Húmeda</option>
+                  <option value="Remodelación o Ampliación">Remodelación o Ampliación</option>
+                  <option value="Diseño y Cálculo NSR-10">Diseño y Cálculo Estructural NSR-10</option>
+                  <option value="Trámite de Licencias Urbanísticas">Trámite de Licencias Urbanísticas</option>
+                  <option value="Evaluación Post-Sismo">Evaluación Post-Sismo</option>
+                  <option value="Proyecto Comercial o Hotelero">Proyecto Comercial o Hotelero</option>
+                </select>
+              </div>
+              <div class="form-group-custom">
+                <label class="form-label-custom">Ubicación del Lote / Predio</label>
+                <input type="text" class="form-input-custom" id="formLocation" placeholder="Ej: Pereira, Cerritos, Circasia...">
+              </div>
+            </div>
+
+            <div class="form-group-custom" style="margin-bottom:24px;">
+              <label class="form-label-custom">Detalles del Proyecto</label>
+              <textarea class="form-input-custom" id="formMessage" rows="3" placeholder="Cuéntanos brevemente qué sueñas construir, área aproximada o si ya cuentas con lote propio..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:14px;">
+              <span class="material-symbols-outlined">send</span>
+              <span>Enviar a WhatsApp Oficial</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom:16px;">
+            <img src="assets/images/LOGOTIPO_CONCRETA.png" alt="Concreta" class="brand-logo-img">
+            <div>
+              <span class="brand-text-name" style="font-size:20px;">CONCRETA <span>·</span></span>
+              <span class="brand-text-tag">INGENIERÍA & ARQUITECTURA</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Empresa especializada en ingeniería civil, arquitectura bioclimática, cálculo sismorresistente y ejecución de obras llave en mano en el Eje Cafetero y Antioquia.
+          </p>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-ghost" onclick="openCompanyEditor()" style="padding:6px 12px; font-size:11px;">
+              <span class="material-symbols-outlined" style="font-size:14px;">settings</span>
+              <span>Panel de Edición</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Servicios</h4>
+          <ul class="footer-links-list">
+            <li><a href="#servicios">Diseño Arquitectónico</a></li>
+            <li><a href="#servicios">Diseño Estructural NSR-10</a></li>
+            <li><a href="#servicios">Licencias y Trámites</a></li>
+            <li><a href="#servicios">Construcción Llave en Mano</a></li>
+            <li><a href="#piscinas">Piscinas y Spas de Lujo</a></li>
+            <li><a href="#servicios">Evaluación Post-Sismo</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navegación</h4>
+          <ul class="footer-links-list">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#portafolio">Portafolio de Obras</a></li>
+            <li><a href="#calculadora">Calculadora de Proyecto</a></li>
+            <li><a href="#metodologia">Metodología en 4 Etapas</a></li>
+            <li><a href="#nosotros">Por Qué Elegirnos</a></li>
+            <li><a href="#contacto">Contacto y Sede</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Sede y Contacto</h4>
+          <div style="font-size:13px; color:var(--text-dim); line-height:1.7; margin-bottom:12px;" id="footerContactBlock">
+            Edificio Quality, Cra. 17 #11-10<br>
+            Pereira, Risaralda · Colombia<br>
+            WhatsApp: +57 302 337 6241<br>
+            Email: contacto@concretaconstructora.com
+          </div>
+          <span style="display:inline-block; font-size:11px; color:var(--verde-brand); font-family:var(--font-mono);">
+            ● Visitas al lote sin costo en Risaralda
+          </span>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Concreta · Ingeniería y Arquitectura. Todos los derechos reservados.
+        </div>
+        <div style="display:flex; gap:16px;">
+          <span>Pereira · Risaralda · Colombia</span>
+          <span>·</span>
+          <a href="#" onclick="openCompanyEditor(); return false;" style="color:var(--verde-brand);">Editar Datos de Empresa</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING BUTTONS ================= -->
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/573023376241?text=Hola%20Concreta,%20quiero%20cotizar%20un%20proyecto" target="_blank" class="floating-wa-btn" id="floatingWaLink" aria-label="WhatsApp Concreta">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- Floating Editor Trigger Button -->
+  <button class="floating-edit-btn" onclick="openCompanyEditor()" title="Editar información de la empresa">
+    <span class="material-symbols-outlined" style="font-size:18px;">tune</span>
+    <span>⚙️ Editar Empresa</span>
+  </button>
+
+  <!-- ================= PROJECT LIGHTBOX MODAL ================= -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeProjectModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <div class="modal-img-wrap">
+        <img src="" alt="" class="modal-img" id="modalMainImg">
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+          <span class="badge-tag" id="modalCategory">CATEGORÍA</span>
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--verde-brand);" id="modalAreaYear">Área · Año</span>
+        </div>
+        <h2 style="font-family:var(--font-display); font-size:32px; font-weight:800; color:#ffffff; margin-bottom:8px;" id="modalTitle">
+          Nombre del Proyecto
+        </h2>
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:20px; display:flex; align-items:center; gap:6px;">
+          <span class="material-symbols-outlined" style="font-size:16px; color:var(--verde-brand);">location_on</span>
+          <span id="modalLocation">Ubicación</span>
+        </div>
+        <p style="font-size:15px; color:var(--text-muted); line-height:1.7; margin-bottom:24px;" id="modalDesc">
+          Descripción detallada del proyecto...
+        </p>
+        <div style="margin-bottom:30px;">
+          <div style="font-family:var(--font-mono); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#ffffff; margin-bottom:12px;">
+            Características Técnicas:
+          </div>
+          <div class="project-chips" id="modalAspects">
+            <!-- Chips rendered here -->
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="#" target="_blank" class="btn btn-primary" id="modalInquireBtn">
+            <span class="material-symbols-outlined">chat</span>
+            <span>Cotizar un Proyecto Similar por WhatsApp</span>
+          </a>
+          <button class="btn btn-secondary" onclick="closeProjectModal()">
+            <span>Cerrar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VISUAL COMPANY DATA EDITOR DRAWER ================= -->
+  <div class="editor-drawer" id="companyEditorDrawer">
+    <div class="editor-header">
+      <div class="editor-title">
+        <span class="material-symbols-outlined" style="color:var(--verde-brand);">admin_panel_settings</span>
+        <span>Editor de Empresa</span>
+      </div>
+      <button class="modal-close-btn" style="position:static;" onclick="closeCompanyEditor()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="editor-tabs">
+      <button class="editor-tab-btn active" data-tab="general" onclick="switchEditorTab('general')">General</button>
+      <button class="editor-tab-btn" data-tab="contacto" onclick="switchEditorTab('contacto')">Contacto</button>
+      <button class="editor-tab-btn" data-tab="metricas" onclick="switchEditorTab('metricas')">Métricas</button>
+      <button class="editor-tab-btn" data-tab="exportar" onclick="switchEditorTab('exportar')">Exportar / GitHub</button>
+    </div>
+
+    <div class="editor-body">
+      <!-- Tab 1: General -->
+      <div class="editor-tab-content active" id="tab-general">
+        <div class="form-group-custom">
+          <label class="form-label-custom">Nombre de la Empresa</label>
+          <input type="text" class="form-input-custom" id="editNombre">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Subtítulo / Especialidad</label>
+          <input type="text" class="form-input-custom" id="editSubtitulo">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Slogan Principal (Hero)</label>
+          <input type="text" class="form-input-custom" id="editSloganPrincipal">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Descripción Detallada (Hero)</label>
+          <textarea class="form-input-custom" id="editSloganSub" rows="3"></textarea>
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Texto de la Píldora de Estado</label>
+          <input type="text" class="form-input-custom" id="editPillText">
+        </div>
+      </div>
+
+      <!-- Tab 2: Contacto -->
+      <div class="editor-tab-content" id="tab-contacto">
+        <div class="form-group-custom">
+          <label class="form-label-custom">Número WhatsApp (sin signos, ej: 573023376241)</label>
+          <input type="text" class="form-input-custom" id="editWhatsapp">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Texto Visible WhatsApp</label>
+          <input type="text" class="form-input-custom" id="editWhatsappDisplay">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Correo Electrónico</label>
+          <input type="email" class="form-input-custom" id="editEmail">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Dirección Sede Física</label>
+          <input type="text" class="form-input-custom" id="editDireccion">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Ciudad / Departamento</label>
+          <input type="text" class="form-input-custom" id="editCiudad">
+        </div>
+      </div>
+
+      <!-- Tab 3: Métricas -->
+      <div class="editor-tab-content" id="tab-metricas">
+        <div class="form-group-custom">
+          <label class="form-label-custom">Años de Trayectoria</label>
+          <input type="text" class="form-input-custom" id="editExp">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Proyectos Entregados</label>
+          <input type="text" class="form-input-custom" id="editProyectos">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Garantía Escrita</label>
+          <input type="text" class="form-input-custom" id="editGarantia">
+        </div>
+        <div class="form-group-custom">
+          <label class="form-label-custom">Satisfacción / Visita Lote</label>
+          <input type="text" class="form-input-custom" id="editSatisfaccion">
+        </div>
+      </div>
+
+      <!-- Tab 4: Exportar / GitHub -->
+      <div class="editor-tab-content" id="tab-exportar">
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+          Los cambios que guardas se aplican de inmediato en este navegador. Para hacerlos permanentes en tu repositorio de GitHub Pages, descarga el archivo <code>company-data.js</code> actualizado o copia el código y reemplázalo en tu repositorio:
+        </p>
+
+        <button class="btn btn-primary" onclick="downloadUpdatedConfigFile()" style="width:100%;">
+          <span class="material-symbols-outlined">download</span>
+          <span>Descargar company-data.js Actualizado</span>
+        </button>
+
+        <button class="btn btn-secondary" onclick="copyConfigCode()" style="width:100%;">
+          <span class="material-symbols-outlined">content_copy</span>
+          <span>Copiar Código al Portapapeles</span>
+        </button>
+
+        <div style="border-top:1px dashed var(--border-subtle); padding-top:16px; margin-top:8px;">
+          <button class="btn btn-ghost" onclick="restoreDefaults()" style="width:100%; color:#f87171; border-color:#f87171;">
+            <span class="material-symbols-outlined">restart_alt</span>
+            <span>Restablecer Valores Predeterminados</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer Footer Actions -->
+    <div class="editor-footer">
+      <button class="btn btn-primary" style="flex:1;" onclick="applyAndSaveEditorChanges()">
+        <span class="material-symbols-outlined">save</span>
+        <span>Guardar y Aplicar</span>
+      </button>
+      <button class="btn btn-secondary" onclick="closeCompanyEditor()">
+        <span>Cerrar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="company-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
